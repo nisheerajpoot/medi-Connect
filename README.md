@@ -40,7 +40,7 @@ CONFIRMED / REJECTED
 - Spring Boot
 - Spring Web (REST APIs)
 - Spring Data JPA
-- MySQL / H2
+- MySQL 
 - Maven
 
 ## 🗂️ Project Structure
@@ -96,7 +96,7 @@ com.mediconnect
 - Update Patient
 - Delete Patient
 
-### Appointment Management ⭐
+### Appointment Management 
 
 - Create Appointment
 - Get All Appointments
