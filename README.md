@@ -2,7 +2,7 @@
 
 A simple **Spring Boot REST API** project to practice core REST API concepts — built without microservices, Spring Security, JWT, or other advanced features, keeping focus purely on clean CRUD design and REST principles.
 
-## 📌 About the Project
+##  About the Project
 
 MediConnect is a Hospital Appointment Management System that simulates a basic appointment booking flow:
 
@@ -34,7 +34,7 @@ Update Status
 CONFIRMED / REJECTED
 ```
 
-## 🧩 Tech Stack
+##  Tech Stack
 
 - Java 17
 - Spring Boot
@@ -68,7 +68,7 @@ com.mediconnect
 
 **Relationship:** One Hospital → Many Doctors
 
-## 🚀 Features
+##  Features
 
 ### Hospital Management
 
@@ -153,7 +153,7 @@ GET    /appointments/doctor/{doctorId}
 PUT    /appointments/{id}/status
 ```
 
-## ⚙️ How to Run
+##  How to Run
 
 1. Clone the repository
    ```
@@ -173,7 +173,3 @@ PUT    /appointments/{id}/status
 - Email/Notification integration
 - Microservices architecture
 - Pagination & Sorting
-
-## 👩‍💻 Author
-
-Built as a practice project to strengthen Spring Boot REST API fundamentals.
