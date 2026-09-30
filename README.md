@@ -343,14 +343,3 @@ The main goal of **MediConnect** is to build a clean and understandable Spring B
 * Appointment business logic
 * Hospital reception workflow
 
----
-
-## 👨‍💻 Author
-
-**Nishee Rajpoot**
-
-GitHub: [nisheerajpoot](https://github.com/nisheerajpoot)
-
----
-
-⭐ If you find this project useful, feel free to star the repository.
