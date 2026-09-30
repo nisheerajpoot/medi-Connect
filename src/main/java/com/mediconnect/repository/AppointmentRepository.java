@@ -4,9 +4,9 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
 import com.mediconnect.entity.Appointment;
+import com.mediconnect.entity.AppointmentStatus;
 
 public interface AppointmentRepository extends JpaRepository<Appointment, Long> {
 
@@ -15,5 +15,10 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
 	List<Appointment> findByDoctorId(Long doctorId);
 	
 	List<Appointment> findByDoctorIdAndAppointmentDate(Long doctorId,LocalDate localdate);
+	List<Appointment> findByHospitalId(Long hospitalId);
+
+	List<Appointment> findByHospitalIdAndPatientId(Long hospitalId, Long patientId);
+
+	List<Appointment> findByHospitalIdAndStatus(Long hospitalId, AppointmentStatus status);
 	
 }

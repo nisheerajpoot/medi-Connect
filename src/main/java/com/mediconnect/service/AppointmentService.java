@@ -13,7 +13,6 @@ public interface AppointmentService {
 	List<AppointmentResponseDTO> getAllAppointments();
 	List<AppointmentResponseDTO> getAppointmentsByPatient(Long patientId);
 	List<AppointmentResponseDTO> getAppointmentsByDoctor(Long doctorId);
-	AppointmentResponseDTO  updateAppointmentStatus(Long id , UpdateAppointmentStatusRequestDTO requestDTO);
 	void deleteAppointment (Long id);
 	
 }

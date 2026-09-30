@@ -57,27 +57,16 @@ public class AppointmentController {
 
    
     @GetMapping("/patient/{patientId}")
-    public ResponseEntity<ApiResponseDTO<List<AppointmentResponseDTO>>> getAppointmentsByPatient(
-            @PathVariable Long patientId) {
+    public ResponseEntity<ApiResponseDTO<List<AppointmentResponseDTO>>> getAppointmentsByPatient(@PathVariable Long patientId) {
         List<AppointmentResponseDTO> appointments = appointmentService.getAppointmentsByPatient(patientId);
         return ResponseEntity.ok(ApiResponseDTO.success(appointments));
     }
 
     
     @GetMapping("/doctor/{doctorId}")
-    public ResponseEntity<ApiResponseDTO<List<AppointmentResponseDTO>>> getAppointmentsByDoctor(
-            @PathVariable Long doctorId) {
+    public ResponseEntity<ApiResponseDTO<List<AppointmentResponseDTO>>> getAppointmentsByDoctor(@PathVariable Long doctorId) {
         List<AppointmentResponseDTO> appointments = appointmentService.getAppointmentsByDoctor(doctorId);
         return ResponseEntity.ok(ApiResponseDTO.success(appointments));
-    }
-
-    
-    @PatchMapping("/{id}/status")
-    public ResponseEntity<ApiResponseDTO<AppointmentResponseDTO>> updateAppointmentStatus(
-            @PathVariable Long id,
-            @Valid @RequestBody UpdateAppointmentStatusRequestDTO requestDTO) {
-        AppointmentResponseDTO updatedAppointment = appointmentService.updateAppointmentStatus(id, requestDTO);
-        return ResponseEntity.ok(ApiResponseDTO.success("Appointment status updated successfully", updatedAppointment));
     }
 
    
