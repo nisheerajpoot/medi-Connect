@@ -228,74 +228,129 @@ Hospital reception staff can manage appointments for their hospital through dedi
 
 ---
 
-# 📌 Appointment Status Flow
+# 🚀 How to Run
+
+## 1. Clone the Repository
+
+```bash
+git clone https://github.com/nisheerajpoot/medi-Connect.git
+```
+
+## 2. Open the Project
+
+Open the project in:
+
+* Eclipse
+* Spring Tool Suite (STS)
+* IntelliJ IDEA
+
+## 3. Configure MySQL
+
+Update your database configuration in:
 
 ```text
-             Create Appointment
-                     │
-                     ▼
-                 ┌─────────┐
-                 │ PENDING │
-                 └────┬────┘
-                      │
-             Reception Reviews
-                ┌─────┴─────┐
-                ▼           ▼
-          ┌───────────┐  ┌──────────┐
-          │ CONFIRMED │  │ REJECTED │
-          └───────────┘  └──────────┘
-                │
-                ▼
-        Assign Time Slot
+src/main/resources/application.properties
+```
+
+Example:
+
+```properties
+spring.datasource.url=jdbc:mysql://localhost:3306/mediconnect
+spring.datasource.username=YOUR_USERNAME
+spring.datasource.password=YOUR_PASSWORD
+```
+
+Use your own MySQL username, password, and database configuration.
+
+## 4. Run the Application
+
+Using Maven Wrapper:
+
+```bash
+./mvnw spring-boot:run
+```
+
+On Windows:
+
+```bash
+mvnw.cmd spring-boot:run
+```
+
+## 5. Test the APIs
+
+The application runs by default at:
+
+```text
+http://localhost:8080
+```
+
+You can test the REST APIs using **Postman**.
+
+---
+
+# 🧪 API Testing
+
+Recommended API testing flow:
+
+```text
+1. Create Hospital
+        ↓
+2. Create Doctor
+        ↓
+3. Create Patient
+        ↓
+4. Create Appointment
+        ↓
+5. Check Appointment → PENDING
+        ↓
+6. Open Reception Dashboard
+        ↓
+7. View Appointment
+        ↓
+8. Confirm / Reject Appointment
+        ↓
+9. If Confirmed → Time Slot Assigned
 ```
 
 ---
 
-# 🔄 Confirming an Appointment
+# 📈 Future Enhancements
 
-### Request
+The project can be extended with:
 
-```http
-PATCH /reception/1/appointments/3/status
-Content-Type: application/json
-```
-
-### Request Body
-
-```json
-{
-  "status": "CONFIRMED",
-  "startTime": "10:00:00",
-  "endTime": "10:30:00"
-}
-```
-
-When the reception confirms an appointment:
-
-* Appointment status becomes `CONFIRMED`
-* `startTime` is assigned
-* `endTime` is assigned
-* Hospital working hours are validated
-* Doctor's existing confirmed appointments are checked for overlapping time slots
+* 🔐 Spring Security & JWT Authentication
+* 📧 Email / Notification Integration
+* 🏗️ Microservices Architecture
+* 📄 Pagination & Sorting
+* 👤 Role-based access control
+* 📊 Advanced hospital/reception dashboards
+* 🔔 Appointment notifications
 
 ---
 
-# ⏰ Appointment Slot Validation
+## 🎯 Project Goal
 
-Before confirming an appointment, the reception flow validates:
+The main goal of **MediConnect** is to build a clean and understandable Spring Boot REST API while learning:
 
-### 1. Hospital Working Hours
+* REST API design
+* CRUD operations
+* Layered architecture
+* DTO-based request/response handling
+* Spring Data JPA
+* Entity relationships
+* Validation
+* Exception handling
+* Appointment business logic
+* Hospital reception workflow
 
-The selected appointment time must fall within the hospital's:
+---
 
-```text
-Opening Time
-      ↓
-Selected Appointment Slot
-      ↓
-Closing Time
-```
+## 👨‍💻 Author
 
-### 2. Doctor Availability
+**Nishee Rajpoot**
 
-The selected time slot must not overlap with anoth
+GitHub: [nisheerajpoot](https://github.com/nisheerajpoot)
+
+---
+
+⭐ If you find this project useful, feel free to star the repository.
