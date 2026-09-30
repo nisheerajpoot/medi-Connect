@@ -1,6 +1,6 @@
-#🏥 MediConnect
+🏥 MediConnect
 
-A simple Spring Boot REST API project to practice core REST API concepts — built without microservices, Spring Security, JWT, or other advanced features, keeping focus purely on clean CRUD design and REST principles.
+#A simple Spring Boot REST API project to practice core REST API concepts — built without microservices, Spring Security, JWT, or other advanced features, keeping focus purely on clean CRUD design and REST principles.
 
 About the Project
 
