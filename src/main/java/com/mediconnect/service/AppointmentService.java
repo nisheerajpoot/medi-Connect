@@ -3,7 +3,7 @@ package com.mediconnect.service;
 import java.util.List;
 
 import com.mediconnect.dto.request.AppointmentRequestDTO;
-import com.mediconnect.dto.request.UpdateAppointmentStatusRequestDTO;
+import com.mediconnect.dto.request.UpdateAppointmentRequestDTO;
 import com.mediconnect.dto.response.AppointmentResponseDTO;
 
 public interface AppointmentService {
@@ -13,6 +13,7 @@ public interface AppointmentService {
 	List<AppointmentResponseDTO> getAllAppointments();
 	List<AppointmentResponseDTO> getAppointmentsByPatient(Long patientId);
 	List<AppointmentResponseDTO> getAppointmentsByDoctor(Long doctorId);
+	AppointmentResponseDTO updateAppointment(Long id, UpdateAppointmentRequestDTO requestDTO);
 	void deleteAppointment (Long id);
 	
 }

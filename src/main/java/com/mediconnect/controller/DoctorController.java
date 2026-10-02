@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +23,7 @@ import com.mediconnect.service.DoctorService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/doctors")
 @RequiredArgsConstructor
@@ -42,6 +44,12 @@ public class DoctorController {
 	public ResponseEntity<ApiResponseDTO<DoctorResponseDTO>> getDoctorById(@PathVariable Long id) {
 	    DoctorResponseDTO response = doctorService.getDoctorById(id);
 	    return ResponseEntity.ok(ApiResponseDTO.success(response));
+	}
+	
+	@GetMapping
+	public ResponseEntity<ApiResponseDTO<List<DoctorResponseDTO>>> getAllDoctors() {
+	    List<DoctorResponseDTO> doctors = doctorService.getAllDoctors();
+	    return ResponseEntity.ok(ApiResponseDTO.success("Fetched " + doctors.size() + " doctors", doctors));
 	}
 	
 	@PutMapping("/{id}")

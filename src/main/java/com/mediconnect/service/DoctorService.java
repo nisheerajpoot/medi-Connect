@@ -10,6 +10,7 @@ import com.mediconnect.dto.response.DoctorResponseDTO;
 public interface DoctorService {
 	DoctorResponseDTO createDoctor(DoctorRequestDTO requestDTO);
 	DoctorResponseDTO getDoctorById(Long id);
+	List<DoctorResponseDTO> getAllDoctors();
 	DoctorResponseDTO updateDoctor(Long id, UpdateDoctorRequestDTO  requestDTO);
 	void deleteDoctor(Long id);
 	List<DoctorResponseDTO> getDoctorsByHospital(Long hospitalId);

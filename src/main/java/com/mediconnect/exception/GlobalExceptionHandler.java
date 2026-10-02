@@ -131,4 +131,18 @@ public class GlobalExceptionHandler {
 
 		return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
+	
+	
+	@ExceptionHandler(UnauthorizedException.class)
+	public ResponseEntity<ErrorResponse> handleUnauthorizedException(
+	        UnauthorizedException ex, HttpServletRequest request) {
+	    ErrorResponse errorResponse = ErrorResponse.builder()
+	            .timeStamp(LocalDateTime.now())
+	            .status(HttpStatus.UNAUTHORIZED.value())
+	            .error("Unauthorized")
+	            .message(ex.getMessage())
+	            .path(request.getRequestURI())
+	            .build();
+	    return new ResponseEntity<>(errorResponse, HttpStatus.UNAUTHORIZED);
+	}
 }

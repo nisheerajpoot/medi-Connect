@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.mediconnect.dto.request.AppointmentRequestDTO;
+import com.mediconnect.dto.request.UpdateAppointmentRequestDTO;
 import com.mediconnect.dto.response.AppointmentResponseDTO;
 import com.mediconnect.dto.response.DoctorResponseDTO;
 import com.mediconnect.dto.response.HospitalResponseDTO;
@@ -15,6 +16,7 @@ import com.mediconnect.entity.AppointmentStatus;
 import com.mediconnect.entity.Doctor;
 import com.mediconnect.entity.Hospital;
 import com.mediconnect.entity.Patient;
+import com.mediconnect.exception.InvalidOperationException;
 import com.mediconnect.exception.ResourceNotFoundException;
 import com.mediconnect.repository.AppointmentRepository;
 import com.mediconnect.repository.DoctorRepository;
@@ -47,6 +49,10 @@ public class AppointmentServiceImpl implements AppointmentService {
 		
 		Hospital hospital =hospitalRepository.findById(requestDTO.getHospitalId())
 				.orElseThrow(()-> new ResourceNotFoundException("Hospital","id",requestDTO.getHospitalId()));
+		
+		if (!doctor.getHospital().getId().equals(hospital.getId())) {
+		    throw new InvalidOperationException("Doctor does not belong to the selected hospital");
+		}
 		
 		Appointment appointment=Appointment.builder()
 				.patient(patient)
@@ -102,6 +108,39 @@ public class AppointmentServiceImpl implements AppointmentService {
             responseList.add(mapToResponseDTO(appointment));
         }
         return responseList;
+	}
+	
+	@Override
+	public AppointmentResponseDTO updateAppointment(Long id, UpdateAppointmentRequestDTO requestDTO) {
+	    Appointment appointment = appointmentRepository.findById(id)
+	            .orElseThrow(() -> new ResourceNotFoundException("Appointment", "id", id));
+
+	    if (appointment.getStatus() != AppointmentStatus.PENDING) {
+	        throw new InvalidOperationException("Only PENDING appointments can be updated");
+	    }
+	    if (requestDTO.getDoctorId() == null
+	            && requestDTO.getAppointmentDate() == null
+	            && requestDTO.getHealthIssue() == null) {
+	        throw new IllegalArgumentException("At least one field must be provided for update");
+	    }
+	    if (requestDTO.getDoctorId() != null) {
+	        Doctor doctor = doctorRepository.findById(requestDTO.getDoctorId())
+	                .orElseThrow(() -> new ResourceNotFoundException("Doctor", "id", requestDTO.getDoctorId()));
+	        if (!doctor.getHospital().getId().equals(appointment.getHospital().getId())) {
+	            throw new InvalidOperationException("Doctor does not belong to this appointment's hospital");
+	        }
+	        appointment.setDoctor(doctor);
+	    }
+	    if (requestDTO.getAppointmentDate() != null) {
+	        appointment.setAppointmentDate(requestDTO.getAppointmentDate());
+	    }
+	    if (requestDTO.getHealthIssue() != null) {
+	        if (requestDTO.getHealthIssue().isBlank()) {
+	            throw new IllegalArgumentException("Health issue cannot be blank");
+	        }
+	        appointment.setHealthIssue(requestDTO.getHealthIssue().trim());
+	    }
+	    return mapToResponseDTO(appointmentRepository.save(appointment));
 	}
 
 

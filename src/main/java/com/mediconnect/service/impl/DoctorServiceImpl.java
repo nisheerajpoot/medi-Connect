@@ -48,6 +48,16 @@ public class DoctorServiceImpl implements DoctorService{
 
 	    return mapToResponseDTO(savedDoctor);
 	}
+	@Override
+	@Transactional(readOnly = true)
+	public List<DoctorResponseDTO> getAllDoctors() {
+	    List<Doctor> doctors = doctorRepository.findAll();
+	    List<DoctorResponseDTO> responseList = new ArrayList<>();
+	    for (Doctor doctor : doctors) {
+	        responseList.add(mapToResponseDTO(doctor));
+	    }
+	    return responseList;
+	}
 	
 	@Override
 	public DoctorResponseDTO updateDoctor(Long id, UpdateDoctorRequestDTO requestDTO) {
